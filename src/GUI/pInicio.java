@@ -31,21 +31,45 @@ public class pInicio extends javax.swing.JPanel {
     private void initComponents() {
 
         Centro = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         btnEntrada = new javax.swing.JButton();
         btnSalida = new javax.swing.JButton();
         btnAlumnos = new javax.swing.JButton();
+        Configuración = new javax.swing.JButton();
         Arriba = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         Abajo = new javax.swing.JPanel();
         Derecha = new javax.swing.JPanel();
         Izquierda = new javax.swing.JPanel();
 
+        setOpaque(false);
         setLayout(new java.awt.BorderLayout());
 
-        Centro.setLayout(new java.awt.GridLayout(1, 3));
+        Centro.setOpaque(false);
+        Centro.setLayout(new java.awt.GridLayout(3, 2));
+
+        jPanel4.setOpaque(false);
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 20));
+
+        jLabel2.setForeground(new java.awt.Color(247, 247, 247));
+        jLabel2.setText("Buscar");
+        jPanel4.add(jLabel2);
+
+        Centro.add(jPanel4);
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 18));
+
+        jTextField1.setText("Prueba");
+        jPanel5.add(jTextField1);
+
+        Centro.add(jPanel5);
 
         btnEntrada.setText("Entrada");
         btnEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +80,11 @@ public class pInicio extends javax.swing.JPanel {
         Centro.add(btnEntrada);
 
         btnSalida.setText("Salida");
+        btnSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalidaActionPerformed(evt);
+            }
+        });
         Centro.add(btnSalida);
 
         btnAlumnos.setText("Alumnos");
@@ -66,9 +95,15 @@ public class pInicio extends javax.swing.JPanel {
         });
         Centro.add(btnAlumnos);
 
+        Configuración.setText("Configuración");
+        Centro.add(Configuración);
+
         add(Centro, java.awt.BorderLayout.CENTER);
 
+        Arriba.setOpaque(false);
         Arriba.setLayout(new java.awt.GridLayout(3, 0));
+
+        jPanel2.setOpaque(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -78,32 +113,26 @@ public class pInicio extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
+            .addGap(0, 27, Short.MAX_VALUE)
         );
 
         Arriba.add(jPanel2);
 
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setText("Gestión de entrada y salida  -  CECyTEM ");
-        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
-
         Arriba.add(jPanel1);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
-        );
+        jPanel3.setOpaque(false);
+
+        jLabel1.setForeground(new java.awt.Color(249, 249, 249));
+        jLabel1.setText("Gestión de entrada y salida  -  CECyTEM ");
+        jPanel3.add(jLabel1);
 
         Arriba.add(jPanel3);
 
         add(Arriba, java.awt.BorderLayout.PAGE_START);
+
+        Abajo.setOpaque(false);
 
         javax.swing.GroupLayout AbajoLayout = new javax.swing.GroupLayout(Abajo);
         Abajo.setLayout(AbajoLayout);
@@ -113,10 +142,12 @@ public class pInicio extends javax.swing.JPanel {
         );
         AbajoLayout.setVerticalGroup(
             AbajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 61, Short.MAX_VALUE)
         );
 
         add(Abajo, java.awt.BorderLayout.PAGE_END);
+
+        Derecha.setOpaque(false);
 
         javax.swing.GroupLayout DerechaLayout = new javax.swing.GroupLayout(Derecha);
         Derecha.setLayout(DerechaLayout);
@@ -130,6 +161,8 @@ public class pInicio extends javax.swing.JPanel {
         );
 
         add(Derecha, java.awt.BorderLayout.LINE_END);
+
+        Izquierda.setOpaque(false);
 
         javax.swing.GroupLayout IzquierdaLayout = new javax.swing.GroupLayout(Izquierda);
         Izquierda.setLayout(IzquierdaLayout);
@@ -146,10 +179,10 @@ public class pInicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumnosActionPerformed
-        pAlumno alumno = new pAlumno();
+        pAlumno alumno = new pAlumno(); //Crea un objeto del tipo pAlumno
         alumno.setLocation(0, 0);
-        ContenedorMain.removeAll();
-        ContenedorMain.add(alumno,GridLayout.class);
+        ContenedorMain.removeAll();//Borra todo lo que esta en el Jframe
+        ContenedorMain.add(alumno,GridLayout.class);//Añade el objeto alumno
         ContenedorMain.revalidate();
         ContenedorMain.repaint();
     }//GEN-LAST:event_btnAlumnosActionPerformed
@@ -163,19 +196,33 @@ public class pInicio extends javax.swing.JPanel {
         ContenedorMain.repaint();
     }//GEN-LAST:event_btnEntradaActionPerformed
 
+    private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
+        pSalida salida = new pSalida();
+        salida.setLocation(0, 0);
+        ContenedorMain.removeAll();
+        ContenedorMain.add(salida,GridLayout.class);
+        ContenedorMain.revalidate();
+        ContenedorMain.repaint();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Abajo;
     private javax.swing.JPanel Arriba;
     private javax.swing.JPanel Centro;
+    private javax.swing.JButton Configuración;
     private javax.swing.JPanel Derecha;
     private javax.swing.JPanel Izquierda;
     private javax.swing.JButton btnAlumnos;
     private javax.swing.JButton btnEntrada;
     private javax.swing.JButton btnSalida;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

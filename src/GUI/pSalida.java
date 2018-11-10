@@ -7,18 +7,17 @@ package GUI;
 
 import static GUI.main.ContenedorMain;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 /**
  *
  * @author angel
  */
-public class pEntrada extends javax.swing.JPanel {
+public class pSalida extends javax.swing.JPanel {
 
     /**
      * Creates new form bajasAlumno
      */
-    public pEntrada() {
+    public pSalida() {
         initComponents();
     }
 

@@ -19,6 +19,7 @@ public class pAlumno extends javax.swing.JPanel {
      */
     public pAlumno() {
         initComponents();
+        btnCambios.setSelected(true);
     }
 
     /**
@@ -29,17 +30,21 @@ public class pAlumno extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        Principales = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
-        btncambios = new javax.swing.JToggleButton();
         btnaltas = new javax.swing.JToggleButton();
         btnbajas = new javax.swing.JToggleButton();
+        btnCambios = new javax.swing.JToggleButton();
         ContenedorAlumno = new javax.swing.JPanel();
+        pDatosAlumno1 = new GUI.pDatosAlumno();
 
-        setLayout(new java.awt.GridLayout());
+        setOpaque(false);
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -55,11 +60,19 @@ public class pAlumno extends javax.swing.JPanel {
             }
         });
 
-        btncambios.setText("Cambios");
-
+        Principales.add(btnaltas);
         btnaltas.setText("Altas");
 
+        Principales.add(btnbajas);
         btnbajas.setText("Bajas");
+
+        Principales.add(btnCambios);
+        btnCambios.setText("Cambios");
+        btnCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,10 +83,10 @@ public class pAlumno extends javax.swing.JPanel {
                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addComponent(btnbajas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btncambios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnaltas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,17 +95,14 @@ public class pAlumno extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
+                .addComponent(btnCambios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnaltas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btncambios)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(btnbajas)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
-
-        ContenedorAlumno.setBackground(new java.awt.Color(102, 102, 102));
-        ContenedorAlumno.setLayout(new java.awt.GridLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,16 +110,27 @@ public class pAlumno extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ContenedorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ContenedorAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         add(jPanel1);
+
+        ContenedorAlumno.setBackground(new java.awt.Color(102, 102, 102));
+        ContenedorAlumno.setOpaque(false);
+        ContenedorAlumno.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 262;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        ContenedorAlumno.add(pDatosAlumno1, gridBagConstraints);
+
+        add(ContenedorAlumno);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -121,15 +142,21 @@ public class pAlumno extends javax.swing.JPanel {
         ContenedorMain.repaint();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void btnCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCambiosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorAlumno;
+    private javax.swing.ButtonGroup Principales;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JToggleButton btnCambios;
     private javax.swing.JToggleButton btnaltas;
     private javax.swing.JToggleButton btnbajas;
-    private javax.swing.JToggleButton btncambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private GUI.pDatosAlumno pDatosAlumno1;
     // End of variables declaration//GEN-END:variables
 }

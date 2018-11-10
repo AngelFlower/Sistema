@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.awt.GridLayout;
+
 /**
  *
  * @author angel
@@ -17,6 +19,12 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         this.setLocationRelativeTo(null);
+        pInicio inicio = new pInicio();
+        //inicio.setLocation(0, 0);
+        ContenedorMain.removeAll();
+        ContenedorMain.add(inicio,GridLayout.class);
+        ContenedorMain.revalidate();
+        ContenedorMain.repaint();
     }
 
     /**
@@ -29,17 +37,14 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         ContenedorMain = new javax.swing.JPanel();
-        pInicio1 = new GUI.pInicio();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
+        ContenedorMain.setBackground(new java.awt.Color(68, 68, 68));
         ContenedorMain.setPreferredSize(new java.awt.Dimension(800, 600));
-        ContenedorMain.setLayout(new java.awt.GridLayout());
-
-        pInicio1.setToolTipText("Entrar");
-        ContenedorMain.add(pInicio1);
-
+        ContenedorMain.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(ContenedorMain);
 
         pack();
@@ -82,6 +87,5 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JPanel ContenedorMain;
-    private GUI.pInicio pInicio1;
     // End of variables declaration//GEN-END:variables
 }
