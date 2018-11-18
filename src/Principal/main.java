@@ -5,7 +5,7 @@
  */
 package Principal;
 
-import GUI.pInicio;
+import GUI.pLogin;
 import java.awt.GridLayout;
 
 /**
@@ -20,9 +20,9 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         this.setLocationRelativeTo(null);
-        pInicio inicio = new pInicio();
+        pLogin login = new pLogin();
         ContenedorMain.removeAll();
-        ContenedorMain.add(inicio,GridLayout.class);
+        ContenedorMain.add(login,GridLayout.class);
         ContenedorMain.revalidate();
         ContenedorMain.repaint();
     }

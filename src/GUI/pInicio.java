@@ -27,6 +27,7 @@ public class pInicio extends javax.swing.JPanel {
         btnEntrada.setName("false");
         btnSalida.setName("false");
         btnConfiguracion.setName("false");
+        btnAlumnos.setName("false");
         pIniciemos iniciemos = new pIniciemos();
         ContenedorInicio.add(iniciemos,GridLayout.class);
         ContenedorInicio.revalidate();
@@ -58,6 +59,9 @@ public class pInicio extends javax.swing.JPanel {
         btnConfiguracion = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        btnAlumnos = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         ContenedorInicio = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -93,7 +97,7 @@ public class pInicio extends javax.swing.JPanel {
             UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36))
@@ -264,6 +268,45 @@ public class pInicio extends javax.swing.JPanel {
             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
         );
 
+        btnAlumnos.setBackground(new java.awt.Color(27, 145, 199));
+        btnAlumnos.setOpaque(false);
+        btnAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlumnosMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAlumnosMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAlumnosMouseEntered(evt);
+            }
+        });
+
+        jLabel9.setForeground(new java.awt.Color(246, 246, 246));
+        jLabel9.setText("Alumnos");
+
+        jLabel10.setBackground(new java.awt.Color(250, 250, 250));
+        jLabel10.setForeground(new java.awt.Color(246, 246, 246));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/exit(2).png"))); // NOI18N
+
+        javax.swing.GroupLayout btnAlumnosLayout = new javax.swing.GroupLayout(btnAlumnos);
+        btnAlumnos.setLayout(btnAlumnosLayout);
+        btnAlumnosLayout.setHorizontalGroup(
+            btnAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAlumnosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnAlumnosLayout.setVerticalGroup(
+            btnAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -273,6 +316,7 @@ public class pInicio extends javax.swing.JPanel {
             .addComponent(btnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +329,9 @@ public class pInicio extends javax.swing.JPanel {
                 .addComponent(btnEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(btnAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -299,15 +345,12 @@ public class pInicio extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+            .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         add(bg);
@@ -323,6 +366,8 @@ public class pInicio extends javax.swing.JPanel {
         btnSalida.setOpaque(false);
         btnConfiguracion.setName("false");
         btnConfiguracion.setOpaque(false);
+        btnAlumnos.setName("false");
+        btnAlumnos.setOpaque(false);
         panel.setName("true");
         panel.setOpaque(true);
         this.repaint();
@@ -422,17 +467,36 @@ public class pInicio extends javax.swing.JPanel {
         EnteredMousePanel(btnConfiguracion);
     }//GEN-LAST:event_btnConfiguracionMouseEntered
 
+    private void btnAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseClicked
+        PanelSelectReset(btnAlumnos);
+        pAlumno alumnos = new pAlumno();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(alumnos,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();
+    }//GEN-LAST:event_btnAlumnosMouseClicked
+
+    private void btnAlumnosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseExited
+        ExitedMousePanel(btnAlumnos);
+    }//GEN-LAST:event_btnAlumnosMouseExited
+
+    private void btnAlumnosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseEntered
+        EnteredMousePanel(btnAlumnos);
+    }//GEN-LAST:event_btnAlumnosMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JPanel ContenedorInicio;
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel User;
     private javax.swing.JPanel bg;
+    private javax.swing.JPanel btnAlumnos;
     private javax.swing.JPanel btnConfiguracion;
     private javax.swing.JPanel btnEntrada;
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnSalida;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -442,5 +506,6 @@ public class pInicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
