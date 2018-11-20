@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import static GUI.pInicio.ContenedorInicio;
+import static GUI.pInicio.MenuMain;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
@@ -12,12 +14,12 @@ import javax.swing.JPanel;
  *
  * @author angel
  */
-public class pInicio extends javax.swing.JPanel {
-    
+public class menuInicio extends javax.swing.JPanel {
+
     /**
-     * Creates new form pInicio
+     * Creates new form menuInicio
      */
-    public pInicio() {
+    public menuInicio() {
         initComponents();
         InitValues();
     }
@@ -42,8 +44,6 @@ public class pInicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg = new javax.swing.JPanel();
-        MenuMain = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         User = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -63,13 +63,8 @@ public class pInicio extends javax.swing.JPanel {
         btnAlumnos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        ContenedorInicio = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(900, 600));
-        setLayout(new java.awt.GridLayout(1, 0));
-
-        MenuMain.setBackground(new java.awt.Color(24, 160, 221));
-        MenuMain.setLayout(new java.awt.GridLayout());
+        setOpaque(false);
 
         jPanel1.setOpaque(false);
 
@@ -344,27 +339,18 @@ public class pInicio extends javax.swing.JPanel {
                     .addContainerGap(233, Short.MAX_VALUE)))
         );
 
-        MenuMain.add(jPanel1);
-
-        ContenedorInicio.setBackground(new java.awt.Color(224, 224, 224));
-        ContenedorInicio.setLayout(new java.awt.GridLayout(1, 0));
-
-        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
-        bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addComponent(MenuMain, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MenuMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ContenedorInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        add(bg);
     }// </editor-fold>//GEN-END:initComponents
     void PanelSelectReset(JPanel panel){
         User.setName("false");
@@ -393,22 +379,6 @@ public class pInicio extends javax.swing.JPanel {
             panel.setOpaque(false);
         this.repaint();
     }
-    private void btnEntradaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradaMouseEntered
-        EnteredMousePanel(btnEntrada);
-    }//GEN-LAST:event_btnEntradaMouseEntered
-
-    private void btnInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseEntered
-        EnteredMousePanel(btnInicio);
-    }//GEN-LAST:event_btnInicioMouseEntered
-
-    private void btnSalidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseEntered
-        EnteredMousePanel(btnSalida);
-    }//GEN-LAST:event_btnSalidaMouseEntered
-
-    private void UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseEntered
-        EnteredMousePanel(User);
-    }//GEN-LAST:event_UserMouseEntered
-
     private void UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseClicked
         PanelSelectReset(User);
         pUsuario usuario = new pUsuario();
@@ -422,26 +392,9 @@ public class pInicio extends javax.swing.JPanel {
         ExitedMousePanel(User);
     }//GEN-LAST:event_UserMouseExited
 
-    private void btnInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseExited
-        ExitedMousePanel(btnInicio);
-    }//GEN-LAST:event_btnInicioMouseExited
-
-    private void btnEntradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradaMouseExited
-        ExitedMousePanel(btnEntrada);
-    }//GEN-LAST:event_btnEntradaMouseExited
-
-    private void btnSalidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseExited
-        ExitedMousePanel(btnSalida);
-    }//GEN-LAST:event_btnSalidaMouseExited
-
-    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
-        PanelSelectReset(btnInicio);
-        pIniciemos iniciemos = new pIniciemos();
-        ContenedorInicio.removeAll();
-        ContenedorInicio.add(iniciemos,GridLayout.class);
-        ContenedorInicio.revalidate();
-        ContenedorInicio.repaint();
-    }//GEN-LAST:event_btnInicioMouseClicked
+    private void UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMouseEntered
+        EnteredMousePanel(User);
+    }//GEN-LAST:event_UserMouseEntered
 
     private void btnEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradaMouseClicked
         PanelSelectReset(btnEntrada);
@@ -452,6 +405,31 @@ public class pInicio extends javax.swing.JPanel {
         ContenedorInicio.repaint();
     }//GEN-LAST:event_btnEntradaMouseClicked
 
+    private void btnEntradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradaMouseExited
+        ExitedMousePanel(btnEntrada);
+    }//GEN-LAST:event_btnEntradaMouseExited
+
+    private void btnEntradaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradaMouseEntered
+        EnteredMousePanel(btnEntrada);
+    }//GEN-LAST:event_btnEntradaMouseEntered
+
+    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
+        PanelSelectReset(btnInicio);
+        pIniciemos iniciemos = new pIniciemos();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(iniciemos,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();
+    }//GEN-LAST:event_btnInicioMouseClicked
+
+    private void btnInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseExited
+        ExitedMousePanel(btnInicio);
+    }//GEN-LAST:event_btnInicioMouseExited
+
+    private void btnInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseEntered
+        EnteredMousePanel(btnInicio);
+    }//GEN-LAST:event_btnInicioMouseEntered
+
     private void btnSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseClicked
         PanelSelectReset(btnSalida);
         pSalida salida = new pSalida();
@@ -460,6 +438,14 @@ public class pInicio extends javax.swing.JPanel {
         ContenedorInicio.revalidate();
         ContenedorInicio.repaint();
     }//GEN-LAST:event_btnSalidaMouseClicked
+
+    private void btnSalidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseExited
+        ExitedMousePanel(btnSalida);
+    }//GEN-LAST:event_btnSalidaMouseExited
+
+    private void btnSalidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseEntered
+        EnteredMousePanel(btnSalida);
+    }//GEN-LAST:event_btnSalidaMouseEntered
 
     private void btnConfiguracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiguracionMouseClicked
         PanelSelectReset(btnConfiguracion);
@@ -502,10 +488,7 @@ public class pInicio extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JPanel ContenedorInicio;
-    public static javax.swing.JPanel MenuMain;
     private javax.swing.JPanel User;
-    private javax.swing.JPanel bg;
     private javax.swing.JPanel btnAlumnos;
     private javax.swing.JPanel btnConfiguracion;
     private javax.swing.JPanel btnEntrada;
