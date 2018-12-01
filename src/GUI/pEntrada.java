@@ -212,7 +212,7 @@ public class pEntrada extends javax.swing.JPanel {
                 String usuario = "root";
                 String contraseña = "root";
 
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
                 con = DriverManager.getConnection(url, usuario, contraseña);
                 if (con != null) {
                     System.out.println("Se ha establecido una conexión a la base de datos "

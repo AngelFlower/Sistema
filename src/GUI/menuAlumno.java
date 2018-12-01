@@ -14,12 +14,12 @@ import javax.swing.JPanel;
  *
  * @author angel
  */
-public class pMenuAlumno extends javax.swing.JPanel {
+public class menuAlumno extends javax.swing.JPanel {
     
     /**
      * Creates new form pMenuAlmno
      */
-    public pMenuAlumno() {
+    public menuAlumno() {
         initComponents();
         InitValues();
     }
@@ -359,7 +359,7 @@ public class pMenuAlumno extends javax.swing.JPanel {
 
     private void btnAltasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltasMouseClicked
         PanelSelectReset(btnAltas);
-        pEntrada entrada = new pEntrada();
+        pAlumnoAltas entrada = new pAlumnoAltas();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(entrada,GridLayout.class);
         ContenedorInicio.revalidate();
@@ -376,9 +376,9 @@ public class pMenuAlumno extends javax.swing.JPanel {
 
     private void btnCambiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCambiosMouseClicked
         PanelSelectReset(btnCambios);
-        pIniciemos iniciemos = new pIniciemos();
+        pAlumnoCambios CambiosAlumno = new pAlumnoCambios();
         ContenedorInicio.removeAll();
-        ContenedorInicio.add(iniciemos,GridLayout.class);
+        ContenedorInicio.add(CambiosAlumno,GridLayout.class);
         ContenedorInicio.revalidate();
         ContenedorInicio.repaint();
     }//GEN-LAST:event_btnCambiosMouseClicked
@@ -410,7 +410,7 @@ public class pMenuAlumno extends javax.swing.JPanel {
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         PanelSelectReset(btnBuscar);
-        pAlumno alumnos = new pAlumno();
+        pAlumnoAltas alumnos = new pAlumnoAltas();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(alumnos,GridLayout.class);
         ContenedorInicio.revalidate();

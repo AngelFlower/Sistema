@@ -60,7 +60,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                      <EmptySpace pref="307" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -86,7 +86,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="dd" green="a0" red="18" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Alumnos"/>
+                <Property name="text" type="java.lang.String" value="Alumnos Altas"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -216,10 +216,8 @@
                       <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel9" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="xFechaNac" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="xFechaNac" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" pref="17" max="-2" attributes="0"/>
                           <Component id="txtCalendar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>

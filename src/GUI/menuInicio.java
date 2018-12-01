@@ -65,7 +65,7 @@ public class menuInicio extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
 
         setOpaque(false);
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setOpaque(false);
 
@@ -322,7 +322,7 @@ public class menuInicio extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(517, Short.MAX_VALUE)
+                .addContainerGap(309, Short.MAX_VALUE)
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +337,7 @@ public class menuInicio extends javax.swing.JPanel {
                     .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(btnAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(233, Short.MAX_VALUE)))
+                    .addContainerGap(25, Short.MAX_VALUE)))
         );
 
         add(jPanel1);
@@ -456,8 +456,8 @@ public class menuInicio extends javax.swing.JPanel {
 
     private void btnAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseClicked
         PanelSelectReset(btnAlumnos);
-        pAlumno alumnos = new pAlumno();
-        pMenuAlumno menu = new pMenuAlumno();
+        pAlumnoAltas alumnos = new pAlumnoAltas();
+        menuAlumno menu = new menuAlumno();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(alumnos,GridLayout.class);
         ContenedorInicio.revalidate();
