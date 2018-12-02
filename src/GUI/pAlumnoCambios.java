@@ -612,12 +612,15 @@ public class pAlumnoCambios extends javax.swing.JPanel {
                     System.out.println("Se ha establecido una conexión a la base de datos "
                             + "\n " + url);
                 }
-                ps = con.prepareStatement("SELECT * FROM Alumno WHERE Nombre = (?)");
+                ps = con.prepareStatement("SELECT * FROM Alumnos WHERE noControl = (?)"); // or Nombre = (?)");
                 ps.setString(1, txtBuscar.getText());
                 stmt = con.createStatement();
-                ps.executeUpdate();
-                System.out.println(""+stmt.getResultSet());
-                System.out.println("Los valores han sido agregados a la base de datos ");
+                rs = ps.executeQuery();
+                if (rs.next()) { //Para leer varias posibles filas se cambia el while por el if
+                    //rs.getInt("id_compania");
+                    txtNombre.setText("Nombre");
+                    txtNoControl.setText(rs.getString("noControl"));
+                }
 
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);

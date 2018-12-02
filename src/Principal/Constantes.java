@@ -14,14 +14,26 @@ import java.util.Date;
  * @author angel
  */
 public class Constantes {
-    public static Date date;
+    public static String Fecha;
+    public static String Hora;
+    Date date = new Date();
+    
+    public Constantes(){
+    }
     public void getFecha() {
-        Date date = new Date();
-//Caso 1: obtener la hora y salida por pantalla con formato:
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Fecha = dateFormat.format(date);
+    }
+    void getHora(){
         DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
         System.out.println("Hora: " + hourFormat.format(date));
-//Caso 2: obtener la fecha y salida por pantalla con formato:
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("Fecha: " + dateFormat.format(date));
+        Hora = hourFormat.format(date);
+    }
+    public static String obtenerFecha(){
+        
+        return Fecha;
+    }
+    public static String obtenerHora(){
+        return Hora;
     }
 }

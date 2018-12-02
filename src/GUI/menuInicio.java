@@ -456,7 +456,7 @@ public class menuInicio extends javax.swing.JPanel {
 
     private void btnAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseClicked
         PanelSelectReset(btnAlumnos);
-        pAlumnoAltas alumnos = new pAlumnoAltas();
+        pAlumnoCambios alumnos = new pAlumnoCambios();
         menuAlumno menu = new menuAlumno();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(alumnos,GridLayout.class);

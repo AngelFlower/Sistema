@@ -7,6 +7,7 @@ package Principal;
 
 import GUI.pLogin;
 import java.awt.GridLayout;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +26,20 @@ public class main extends javax.swing.JFrame {
         ContenedorMain.add(login,GridLayout.class);
         ContenedorMain.revalidate();
         ContenedorMain.repaint();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+ 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                close();
+            }
+        });
     }
+     private void close(){
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?",
+                "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+            System.exit(0);
+    }       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +95,7 @@ public class main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
+                Constantes c = new Constantes();
             }
         });
     }

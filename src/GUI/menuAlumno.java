@@ -393,7 +393,7 @@ public class menuAlumno extends javax.swing.JPanel {
 
     private void btnBajasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBajasMouseClicked
         PanelSelectReset(btnBajas);
-        pSalida salida = new pSalida();
+        pAlumnoBajas salida = new pAlumnoBajas();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(salida,GridLayout.class);
         ContenedorInicio.revalidate();

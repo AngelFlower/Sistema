@@ -5,17 +5,35 @@
  */
 package GUI;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import sql.conexion;
+
 /**
  *
  * @author angel
  */
 public class pSalida extends javax.swing.JPanel {
-
+    Connection con;
+    Statement stmt;
+    PreparedStatement ps;
+    ResultSet rs;
     /**
      * Creates new form Psalida
      */
     public pSalida() {
         initComponents();
+        xNumControl.setVisible(false);
     }
 
     /**
@@ -34,7 +52,8 @@ public class pSalida extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtNoControl = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        xNumControl = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridLayout(1, 0));
 
@@ -54,7 +73,7 @@ public class pSalida extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(250, 250, 250)
                 .addComponent(jLabel1)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,8 +112,17 @@ public class pSalida extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(244, 244, 244));
-        jButton1.setText("Registrar");
+        btnRegistrar.setBackground(new java.awt.Color(244, 244, 244));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        xNumControl.setForeground(new java.awt.Color(214, 36, 55));
+        xNumControl.setText("X");
+        xNumControl.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
@@ -106,12 +134,15 @@ public class pSalida extends javax.swing.JPanel {
                 .addGap(287, 287, 287)
                 .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNoControl)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ContenedorLayout.createSequentialGroup()
+                        .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegistrar)
+                            .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNoControl)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(xNumControl)))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,17 +153,31 @@ public class pSalida extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txtNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xNumControl, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 261, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistrar)
+                .addGap(0, 287, Short.MAX_VALUE))
         );
 
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private boolean Validacion() {
+        boolean noControl;
+        if (txtNoControl.getText().isEmpty() || txtNoControl.getText().length() != 14) {
+            xNumControl.setVisible(true);
+            noControl = false;
+        } else {
+            xNumControl.setVisible(false);
+            noControl = true;
+        }
+        return noControl;
+    }
+    
     private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
 
     }//GEN-LAST:event_txtNoControlActionPerformed
@@ -141,20 +186,83 @@ public class pSalida extends javax.swing.JPanel {
         if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-        if(txtNoControl.getText().length()>11){
+        if(txtNoControl.getText().length()>13){
             evt.consume();
         }
     }//GEN-LAST:event_txtNoControlKeyTyped
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+         if (Validacion()) {
+            //JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Mensaje", 1);
+            Date date = new Date();
+            //Caso 1: obtener la hora y salida por pantalla con formato:
+            DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+            System.out.println("Hora: " + hourFormat.format(date));
+            //Caso 2: obtener la fecha y salida por pantalla con formato:
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("Fecha: " + dateFormat.format(date));
+            long d = date.getTime();
+            java.sql.Date fecha = new java.sql.Date(d);
+            System.out.println("" + fecha);
+            String sqlNoControl = txtNoControl.getText();
+            try {
+                String url = "jdbc:mysql://localhost:3306/cecytem";
+                String usuario = "root";
+                String contraseña = "root";
+
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                con = DriverManager.getConnection(url, usuario, contraseña);
+                if (con != null) {
+                    System.out.println("Se ha establecido una conexión a la base de datos "
+                            + "\n " + url);
+                }
+                ps = con.prepareStatement("SELECT * FROM Alumnos WHERE noControl = (?)"); // or Nombre = (?)");
+                ps.setString(1, txtNoControl.getText());
+                stmt = con.createStatement();
+                rs = ps.executeQuery();
+                if (rs.next()) { //Para leer varias posibles filas se cambia el while por el if
+                    //rs.getInt("id_compania");
+                    ps = con.prepareStatement("INSERT INTO Salida (noControl,Fecha, Hora) VALUES(?,?,?)");
+                    ps.setString(1, txtNoControl.getText());
+                    ps.setString(2, dateFormat.format(date));
+                    ps.setString(3, hourFormat.format(date));
+                    stmt = con.createStatement();
+                    ps.executeUpdate();
+                    System.out.println("Los valores han sido agregados a la base de datos ");
+                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error al agregar");
+                JOptionPane.showMessageDialog(null, "Error al registar salida","Base de datos error",0);
+            } finally {
+                if (con != null) {
+                    try {
+                        con.close();
+                        stmt.close();
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtNoControl;
+    private javax.swing.JLabel xNumControl;
     // End of variables declaration//GEN-END:variables
 }
