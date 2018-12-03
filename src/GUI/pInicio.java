@@ -465,7 +465,7 @@ public class pInicio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalidaMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
-        PanelSelectReset(btnCerrarSesion);
+        //PanelSelectReset(btnCerrarSesion);
         int reply = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesion?",
                 "Confirmar", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {

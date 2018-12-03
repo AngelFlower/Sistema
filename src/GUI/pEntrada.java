@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -112,6 +114,9 @@ public class pEntrada extends javax.swing.JPanel {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNoControlKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoControlKeyPressed(evt);
+            }
         });
 
         xNumControl.setForeground(new java.awt.Color(214, 36, 55));
@@ -180,23 +185,10 @@ public class pEntrada extends javax.swing.JPanel {
         }
         return noControl;
     }
-    private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
-
-    }//GEN-LAST:event_txtNoControlActionPerformed
-
-    private void txtNoControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
-        if (txtNoControl.getText().length() > 13) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtNoControlKeyTyped
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    
+    private void Registar(){
         if (Validacion()) {
-            JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Mensaje", 1);
+            //JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Mensaje", 1);
             Date date = new Date();
             //Caso 1: obtener la hora y salida por pantalla con formato:
             DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
@@ -219,16 +211,33 @@ public class pEntrada extends javax.swing.JPanel {
                     System.out.println("Se ha establecido una conexión a la base de datos "
                             + "\n " + url);
                 }
-                ps = con.prepareStatement("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES(?,?,?)");
+                ps = con.prepareStatement("SELECT * FROM Alumnos WHERE noControl = (?)"); // or Nombre = (?)");
                 ps.setString(1, txtNoControl.getText());
-                ps.setString(2, dateFormat.format(date));
-                ps.setString(3, hourFormat.format(date));
                 stmt = con.createStatement();
-                ps.executeUpdate();
-                System.out.println("Los valores han sido agregados a la base de datos ");
+                rs = ps.executeQuery();
+                if (rs.next()) { //Para leer varias posibles filas se cambia el while por el if
+                    //rs.getInt("id_compania");
+                    ps = con.prepareStatement("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES(?,?,?)");
+                    ps.setString(1, txtNoControl.getText());
+                    ps.setString(2, dateFormat.format(date));
+                    ps.setString(3, hourFormat.format(date));
+                    stmt = con.createStatement();
+                    ps.executeUpdate();
+                    System.out.println("Los valores han sido agregados a la base de datos ");
+                    JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!",
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    txtNoControl.setText("");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
+                            "Aviso",0);
+                    txtNoControl.requestFocus();
+                }
 
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error al agregar");
+                JOptionPane.showMessageDialog(null, "Error al registar salida","Aviso - Base de datos error",0);
             } finally {
                 if (con != null) {
                     try {
@@ -239,11 +248,36 @@ public class pEntrada extends javax.swing.JPanel {
                     }
                 }
             }
-            javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);
         }
+    }
+    
+    private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
+
+    }//GEN-LAST:event_txtNoControlActionPerformed
+
+    private void txtNoControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+        if (txtNoControl.getText().length() > 13) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNoControlKeyTyped
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtNoControlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyPressed
+        switch(evt.getKeyCode()){
+            case KeyEvent.VK_ENTER:
+                Registar();
+        }
+    }//GEN-LAST:event_txtNoControlKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

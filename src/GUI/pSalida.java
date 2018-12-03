@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -110,6 +111,9 @@ public class pSalida extends javax.swing.JPanel {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNoControlKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoControlKeyPressed(evt);
+            }
         });
 
         btnRegistrar.setBackground(new java.awt.Color(244, 244, 244));
@@ -141,8 +145,8 @@ public class pSalida extends javax.swing.JPanel {
                                 .addComponent(txtNoControl)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xNumControl)))
-                .addContainerGap(327, Short.MAX_VALUE))
+                        .addComponent(xNumControl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,12 +159,12 @@ public class pSalida extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xNumControl, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                    .addComponent(xNumControl))
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrar)
-                .addGap(0, 287, Short.MAX_VALUE))
+                .addGap(0, 290, Short.MAX_VALUE))
         );
 
         add(Contenedor);
@@ -178,21 +182,8 @@ public class pSalida extends javax.swing.JPanel {
         return noControl;
     }
     
-    private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
-
-    }//GEN-LAST:event_txtNoControlActionPerformed
-
-    private void txtNoControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyTyped
-        if(!Character.isDigit(evt.getKeyChar())){
-            evt.consume();
-        }
-        if(txtNoControl.getText().length()>13){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNoControlKeyTyped
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-         if (Validacion()) {
+    private void Registrar(){
+        if (Validacion()) {
             //JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Mensaje", 1);
             Date date = new Date();
             //Caso 1: obtener la hora y salida por pantalla con formato:
@@ -229,14 +220,20 @@ public class pSalida extends javax.swing.JPanel {
                     stmt = con.createStatement();
                     ps.executeUpdate();
                     System.out.println("Los valores han sido agregados a la base de datos ");
-                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!",
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    txtNoControl.setText("");
                 }
-                
+                else{
+                    JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
+                            "Aviso",0);
+                    txtNoControl.requestFocus();
+                }
 
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Error al agregar");
-                JOptionPane.showMessageDialog(null, "Error al registar salida","Base de datos error",0);
+                JOptionPane.showMessageDialog(null, "Error al registar salida","Aviso - Base de datos error",0);
             } finally {
                 if (con != null) {
                     try {
@@ -251,7 +248,30 @@ public class pSalida extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);
         }
+    }
+    private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
+
+    }//GEN-LAST:event_txtNoControlActionPerformed
+
+    private void txtNoControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+        if(txtNoControl.getText().length()>13){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNoControlKeyTyped
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+         Registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtNoControlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyPressed
+        switch(evt.getKeyCode()){
+            case KeyEvent.VK_ENTER:
+                Registrar();
+        }
+    }//GEN-LAST:event_txtNoControlKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

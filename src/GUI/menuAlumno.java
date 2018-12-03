@@ -7,6 +7,7 @@ package GUI;
 
 import static GUI.pInicio.ContenedorInicio;
 import static GUI.pInicio.MenuMain;
+import static Principal.main.ContenedorMain;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
@@ -29,10 +30,12 @@ public class menuAlumno extends javax.swing.JPanel {
         btnAltas.setName("false");
         btnBajas.setName("false");
         btnBuscar.setName("false");
+        /*
         pIniciemos iniciemos = new pIniciemos();
         ContenedorInicio.add(iniciemos,GridLayout.class);
         ContenedorInicio.revalidate();
         ContenedorInicio.repaint();
+        */
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -337,16 +340,25 @@ public class menuAlumno extends javax.swing.JPanel {
     }
     private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
         PanelSelectReset(btnInicio);
+        pInicio inicio =  new pInicio();
+        pInicio a = new pInicio();
+        ContenedorMain.removeAll();
+        ContenedorMain.add(a,GridLayout.class);
+        ContenedorMain.revalidate();
+        ContenedorMain.repaint();
+        /*
         pIniciemos usuario = new pIniciemos();
         ContenedorInicio.removeAll();
         ContenedorInicio.add(usuario,GridLayout.class);
         ContenedorInicio.revalidate();
         ContenedorInicio.repaint();
+        
         menuInicio menu = new menuInicio();
         MenuMain.removeAll();
         MenuMain.add(menu,GridLayout.class);
         MenuMain.revalidate();
         MenuMain.repaint();
+        */
     }//GEN-LAST:event_btnInicioMouseClicked
 
     private void btnInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseExited
