@@ -27,7 +27,6 @@ public class main extends javax.swing.JFrame {
         ContenedorMain.revalidate();
         ContenedorMain.repaint();
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
- 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -54,8 +53,8 @@ public class main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion de entrada CECyTEM");
-        setPreferredSize(new java.awt.Dimension(900, 600));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         ContenedorMain.setLayout(new java.awt.GridLayout(1, 0));
@@ -95,7 +94,6 @@ public class main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
-                Constantes c = new Constantes();
             }
         });
     }

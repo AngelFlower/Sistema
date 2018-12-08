@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Herramientas.FechaHora;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -19,7 +20,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sql.conexion;
+import Herramientas.BD;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,6 +40,11 @@ public class pEntrada extends javax.swing.JPanel {
     public pEntrada() {
         initComponents();
         xNumControl.setVisible(false);
+        try {
+            llenarLista("");
+        } catch (SQLException ex) {
+            Logger.getLogger(pEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -53,39 +60,32 @@ public class pEntrada extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtNoControl = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         xNumControl = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaEntrada = new javax.swing.JTable();
 
         setLayout(new java.awt.GridLayout(1, 0));
 
         Contenedor.setBackground(new java.awt.Color(244, 244, 244));
 
         jPanel1.setBackground(new java.awt.Color(249, 249, 249));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setBackground(new java.awt.Color(24, 160, 221));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(24, 160, 221));
-        jLabel1.setText("Registro de entrada");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(jLabel1)
-                .addContainerGap(314, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        jLabel1.setText("<html>\n<p></p>\n<p></p>\nRegistro de entrada\n<p></p>\n<p></p>\n<p></p>\n<html>");
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,6 +97,12 @@ public class pEntrada extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 9, Short.MAX_VALUE)
         );
+
+        jPanel4.setOpaque(false);
+
+        jPanel5.setOpaque(false);
+
+        jPanel3.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Número de control");
@@ -131,25 +137,117 @@ public class pEntrada extends javax.swing.JPanel {
             }
         });
 
+        btnBuscar.setBackground(new java.awt.Color(241, 241, 241));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(xNumControl, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistrar))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNoControl)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(24, 24, 24))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(xNumControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnBuscar))
+                .addGap(6, 6, 6))
+        );
+
+        jPanel5.add(jPanel3);
+
+        jPanel6.setOpaque(false);
+
+        jPanel9.setLayout(new java.awt.GridLayout());
+
+        TablaEntrada.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TablaEntrada.setPreferredSize(null);
+        jScrollPane1.setViewportView(TablaEntrada);
+
+        jPanel9.add(jScrollPane1);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ContenedorLayout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(ContenedorLayout.createSequentialGroup()
-                        .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegistrar)
-                            .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNoControl)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xNumControl)))
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,17 +255,8 @@ public class pEntrada extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xNumControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNoControl))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrar)
-                .addGap(0, 290, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(Contenedor);
@@ -186,20 +275,37 @@ public class pEntrada extends javax.swing.JPanel {
         return noControl;
     }
     
+    private void llenarLista(String condicion) throws SQLException{
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Número de Entrada");
+            modelo.addColumn("Nombre del Alumno");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Hora");
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("select e.NumEntrada, a.Nombre, a.ApPat, a.ApMat, "
+                    + "e.Fecha, e.Hora "
+                    + "from Entrada e, Alumnos a "
+                    + "where e.noControl = a.noControl "
+                    + ""+condicion+""
+                    + "order by NumEntrada asc limit 35 ");
+            while(rs.next()){
+                System.out.println(rs.getString("Nombre"));
+                modelo.addRow(new Object[]{rs.getString("NumEntrada"),
+                    rs.getString("a.Nombre")+" "+rs.getString("a.ApPat")+" "
+                        +rs.getString("a.ApMat"),rs.getString("e.Fecha"),
+                        rs.getString("e.Hora")});
+            }
+            
+            TablaEntrada.setModel(modelo);
+            TablaEntrada.setDefaultEditor(Object.class, null);
+            b.cerrarBD();
+            //javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     private void Registar(){
         if (Validacion()) {
-            //JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Mensaje", 1);
-            Date date = new Date();
-            //Caso 1: obtener la hora y salida por pantalla con formato:
-            DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
-            System.out.println("Hora: " + hourFormat.format(date));
-            //Caso 2: obtener la fecha y salida por pantalla con formato:
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            System.out.println("Fecha: " + dateFormat.format(date));
-            long d = date.getTime();
-            java.sql.Date fecha = new java.sql.Date(d);
-            System.out.println("" + fecha);
-            String sqlNoControl = txtNoControl.getText();
             try {
                 String url = "jdbc:mysql://localhost:3306/cecytem";
                 String usuario = "root";
@@ -219,8 +325,8 @@ public class pEntrada extends javax.swing.JPanel {
                     //rs.getInt("id_compania");
                     ps = con.prepareStatement("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES(?,?,?)");
                     ps.setString(1, txtNoControl.getText());
-                    ps.setString(2, dateFormat.format(date));
-                    ps.setString(3, hourFormat.format(date));
+                    ps.setString(2, FechaHora.obtenerFecha());
+                    ps.setString(3, FechaHora.obtenerHora());
                     stmt = con.createStatement();
                     ps.executeUpdate();
                     System.out.println("Los valores han sido agregados a la base de datos ");
@@ -235,7 +341,7 @@ public class pEntrada extends javax.swing.JPanel {
                 }
 
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Error al agregar");
                 JOptionPane.showMessageDialog(null, "Error al registar salida","Aviso - Base de datos error",0);
             } finally {
@@ -279,14 +385,57 @@ public class pEntrada extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtNoControlKeyPressed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        xNumControl.setVisible(false);
+        if(!txtNoControl.getText().isEmpty()){
+            try {
+                /*String sqlBusqueda = txtBuscar.getText();
+                try {
+                    BD b;
+                    b=new BD();
+                    b.conectarBD();
+                    rs = b.ejecutarSentenciaSQL("SELECT * FROM Alumnos WHERE noControl="
+                        + "'" + txtNoControl.getText()+"'");
+                    b.cerrarBD();
+                    if(rs.next())
+                    llenarLista(sqlNoControl)
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                */
+                llenarLista("AND e.noControl LIKE '"+txtNoControl.getText()+"%'");
+            } catch (SQLException ex) {
+                Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtNoControl.requestFocus();
+        }
+        else{
+            try {
+                llenarLista("");
+            } catch (SQLException ex) {
+                Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtNoControl.requestFocus();
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenedor;
+    private javax.swing.JTable TablaEntrada;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtNoControl;
     private javax.swing.JLabel xNumControl;

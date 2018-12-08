@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import static GUI.pInicio.ContenedorInicio;
+import java.awt.GridLayout;
+
 /**
  *
  * @author angel
@@ -34,7 +37,7 @@ public class pIniciemos extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         Centro = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnPerfil = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
@@ -52,28 +55,13 @@ public class pIniciemos extends javax.swing.JPanel {
         Contenedor.setBackground(new java.awt.Color(244, 244, 244));
 
         jPanel1.setBackground(new java.awt.Color(249, 249, 249));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setBackground(new java.awt.Color(24, 160, 221));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(24, 160, 221));
-        jLabel1.setText("Bienvenido");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        jLabel1.setText("<html>\n<p></p>\n<p></p>\nBienvenido\n<p></p>\n<p></p>\n<p></p>\n<html>");
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,20 +81,25 @@ public class pIniciemos extends javax.swing.JPanel {
         Centro.setLayout(new java.awt.GridLayout(2, 2));
 
         jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user(1).png"))); // NOI18N
-        jButton1.setText(" Ver mi pefil");
-        jButton1.setToolTipText("");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jPanel4.add(jButton1);
+        btnPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user(1).png"))); // NOI18N
+        btnPerfil.setText(" Ver mi pefil");
+        btnPerfil.setToolTipText("");
+        btnPerfil.setContentAreaFilled(false);
+        btnPerfil.setFocusPainted(false);
+        btnPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPerfilMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnPerfil);
 
         Centro.add(jPanel4);
 
         jPanel9.setOpaque(false);
-        jPanel9.setLayout(new java.awt.GridLayout());
+        jPanel9.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logina.png"))); // NOI18N
@@ -118,7 +111,7 @@ public class pIniciemos extends javax.swing.JPanel {
         Centro.add(jPanel9);
 
         jPanel10.setOpaque(false);
-        jPanel10.setLayout(new java.awt.GridLayout());
+        jPanel10.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/salida.png"))); // NOI18N
@@ -130,7 +123,7 @@ public class pIniciemos extends javax.swing.JPanel {
         Centro.add(jPanel10);
 
         jPanel11.setOpaque(false);
-        jPanel11.setLayout(new java.awt.GridLayout());
+        jPanel11.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pasar.png"))); // NOI18N
@@ -176,7 +169,7 @@ public class pIniciemos extends javax.swing.JPanel {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 227, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.LINE_END);
@@ -191,7 +184,7 @@ public class pIniciemos extends javax.swing.JPanel {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 227, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel8, java.awt.BorderLayout.LINE_START);
@@ -211,17 +204,25 @@ public class pIniciemos extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
         );
 
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseClicked
+        pUsuario iniciemos = new pUsuario();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(iniciemos,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();// TODO add your handling code here:
+    }//GEN-LAST:event_btnPerfilMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Contenedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -41,28 +41,13 @@ public class pUsuario extends javax.swing.JPanel {
         Contenedor.setBackground(new java.awt.Color(244, 244, 244));
 
         jPanel1.setBackground(new java.awt.Color(249, 249, 249));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setBackground(new java.awt.Color(24, 160, 221));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(24, 160, 221));
-        jLabel1.setText("Administrador");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(jLabel1)
-                .addContainerGap(364, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(0, 64, Short.MAX_VALUE))
-        );
+        jLabel1.setText("<html> \n<p></p> \n<p></p> \nUsuario\n<p></p>\n<p></p>\n<p></p>\n<html>");
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -119,7 +104,7 @@ public class pUsuario extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)))
-                .addGap(0, 225, Short.MAX_VALUE))
+                .addGap(0, 275, Short.MAX_VALUE))
         );
 
         add(Contenedor);

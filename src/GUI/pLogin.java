@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import static Principal.Constantes.GetContraseña;
+import static Principal.Constantes.GetUsuario;
+import static Principal.Constantes.SetContraseña;
+import static Principal.Constantes.SetUsuario;
 import static Principal.main.ContenedorMain;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -27,8 +31,8 @@ public class pLogin extends javax.swing.JPanel {
     public void user(){
         user = new String[2];
         pass = new String[2];
-        user[0]="admin";
-        pass[0]="admin";
+        user[0]="Admin";
+        pass[0]="Admins";
         user[1]="root";
         pass[1]="root";
         Existe = false;
@@ -193,6 +197,8 @@ public class pLogin extends javax.swing.JPanel {
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
     private void Ingresar(){
+        SetUsuario(txtUsuario.getText());
+        SetContraseña(txtContraseña.getText());
         for(int i=0;i<user.length;i++){
             if(txtUsuario.getText().equals(user[i])){
                 System.out.println("Usuario existente");
@@ -210,6 +216,7 @@ public class pLogin extends javax.swing.JPanel {
             ContenedorMain.add(inicio,GridLayout.class);
             ContenedorMain.revalidate();
             ContenedorMain.repaint();
+            System.out.println("Usuario: "+GetUsuario()+"\nContraseña: "+GetContraseña());
         }
         else
             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");

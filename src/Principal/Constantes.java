@@ -5,35 +5,24 @@
  */
 package Principal;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author angel
  */
 public class Constantes {
-    public static String Fecha;
-    public static String Hora;
-    Date date = new Date();
-    
-    public Constantes(){
+    public static String Usuario;
+    public static String Contraseña;
+   
+    public static void SetUsuario(String User){
+        Usuario = User;
     }
-    public void getFecha() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Fecha = dateFormat.format(date);
+    public static void SetContraseña(String Pass){
+        Contraseña = Pass;
     }
-    void getHora(){
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
-        System.out.println("Hora: " + hourFormat.format(date));
-        Hora = hourFormat.format(date);
+    public static String GetUsuario(){
+        return Usuario;
     }
-    public static String obtenerFecha(){
-        
-        return Fecha;
-    }
-    public static String obtenerHora(){
-        return Hora;
+    public static String GetContraseña(){
+        return Contraseña;
     }
 }
