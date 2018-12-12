@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import static GUI.pInicio.btnPagAnterior;
+import static GUI.pInicio.btnPagFinal;
+import static GUI.pInicio.btnPagInicio;
+import static GUI.pInicio.btnPagSiguiente;
+import static GUI.pInicio.etiEstadoGuardar;
 import Herramientas.FechaHora;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -45,6 +50,7 @@ public class pSalida extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pSalida.class.getName()).log(Level.SEVERE, null, ex);
         }
+        valuesInit();
     }
 
     /**
@@ -260,6 +266,15 @@ public class pSalida extends javax.swing.JPanel {
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
     
+    void valuesInit(){
+        /*Barra*/
+        btnPagInicio.setVisible(true);
+        btnPagAnterior.setVisible(true);
+        btnPagSiguiente.setVisible(true);
+        btnPagFinal.setVisible(true);
+        etiEstadoGuardar.setText("");
+        etiEstadoGuardar.setForeground(new Color(51,51,51));
+    }
 
     private boolean Validacion() {
         boolean noControl;
@@ -287,13 +302,13 @@ public class pSalida extends javax.swing.JPanel {
                     + "from Salida s, Alumnos a "
                     + "where s.noControl = a.noControl "
                     + ""+condicion+""
-                    + "order by NumSalida asc limit 35 ");
+                    + "order by NumSalida desc limit 35 ");
             while(rs.next()){
                 System.out.println(rs.getString("Nombre"));
-                modelo.addRow(new Object[]{rs.getString("NumEntrada"),
+                modelo.addRow(new Object[]{rs.getString("s.NumSalida"),
                     rs.getString("a.Nombre")+" "+rs.getString("a.ApPat")+" "
-                        +rs.getString("a.ApMat"),rs.getString("e.Fecha"),
-                        rs.getString("e.Hora")});
+                        +rs.getString("a.ApMat"),rs.getString("s.Fecha"),
+                        rs.getString("s.Hora")});
             }
             
             TablaEntrada.setModel(modelo);
@@ -305,53 +320,25 @@ public class pSalida extends javax.swing.JPanel {
     private void Registar(){
         if (Validacion()) {
             try {
-                String url = "jdbc:mysql://localhost:3306/cecytem";
-                String usuario = "root";
-                String contraseña = "root";
-
-                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                con = DriverManager.getConnection(url, usuario, contraseña);
-                if (con != null) {
-                    System.out.println("Se ha establecido una conexión a la base de datos "
-                            + "\n " + url);
-                }
-                ps = con.prepareStatement("SELECT * FROM Alumnos WHERE noControl = (?)"); // or Nombre = (?)");
-                ps.setString(1, txtNoControl.getText());
-                stmt = con.createStatement();
-                rs = ps.executeQuery();
-                if (rs.next()) { //Para leer varias posibles filas se cambia el while por el if
-                    //rs.getInt("id_compania");
-                    ps = con.prepareStatement("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES(?,?,?)");
-                    ps.setString(1, txtNoControl.getText());
-                    ps.setString(2, FechaHora.obtenerFecha());
-                    ps.setString(3, FechaHora.obtenerHora());
-                    stmt = con.createStatement();
-                    ps.executeUpdate();
-                    System.out.println("Los valores han sido agregados a la base de datos ");
-                    JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!",
-                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    txtNoControl.setText("");
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
-                            "Aviso",0);
-                    txtNoControl.requestFocus();
-                }
-
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Error al agregar");
-                JOptionPane.showMessageDialog(null, "Error al registar salida","Aviso - Base de datos error",0);
-            } finally {
-                if (con != null) {
-                    try {
-                        con.close();
-                        stmt.close();
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE "
+                    + "noControl = '"+txtNoControl.getText()+"'");
+            if(rs.next()){
+                b.ejecutarSentenciaSQL("INSERT INTO Salida (noControl, Fecha, Hora) VALUES ('"
+                        +txtNoControl.getText()+"','"+FechaHora.obtenerFecha()+"','"+FechaHora.obtenerHora()+"')");
+                        llenarLista("");
             }
+            else{
+                JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
+                            "Aviso",0);
+                txtNoControl.requestFocus();
+            }
+            b.cerrarBD();
+        } catch (SQLException ex) {
+            Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } 
             
         } else {
             JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);

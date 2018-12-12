@@ -41,7 +41,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="jPanel3" pref="355" max="32767" attributes="0"/>
+                  <Component id="jPanel3" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -153,7 +153,7 @@
                     <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton2">
+                    <Component class="javax.swing.JButton" name="btnEntrada">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Dialog" size="14" style="1"/>
@@ -165,6 +165,9 @@
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                         <Property name="focusPainted" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEntradaActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -178,7 +181,7 @@
                     <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton3">
+                    <Component class="javax.swing.JButton" name="btnSalida">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Dialog" size="14" style="1"/>
@@ -190,6 +193,9 @@
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                         <Property name="focusPainted" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalidaActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -203,7 +209,7 @@
                     <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton4">
+                    <Component class="javax.swing.JButton" name="btnAlumnos">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Dialog" size="14" style="1"/>
@@ -215,6 +221,9 @@
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                         <Property name="focusPainted" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlumnosActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -237,7 +246,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="16" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="&lt;HTML&gt;&#xa;&lt;P&gt;&lt;/P&gt;&#xa;&#xbf;Qu&#xe9; quires hacer?&#xa;&lt;P&gt;&lt;/P&gt;&#xa;&lt;P&gt;&lt;/P&gt;&#xa;&lt;HTML&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;HTML&gt; &lt;P&gt;&lt;/P&gt; &#xbf;Qu&#xe9; quieres hacer? &lt;P&gt;&lt;/P&gt; &lt;P&gt;&lt;/P&gt; &lt;HTML&gt;"/>
                   </Properties>
                 </Component>
               </SubComponents>

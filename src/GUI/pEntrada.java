@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import static GUI.pInicio.btnPagAnterior;
+import static GUI.pInicio.btnPagFinal;
+import static GUI.pInicio.btnPagInicio;
+import static GUI.pInicio.btnPagSiguiente;
+import static GUI.pInicio.etiEstadoGuardar;
 import Herramientas.FechaHora;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -21,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Herramientas.BD;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,11 +34,11 @@ import javax.swing.table.DefaultTableModel;
  * @author angel
  */
 public class pEntrada extends javax.swing.JPanel {
-
+    public static int numDePagina;
     Connection con;
     Statement stmt;
     PreparedStatement ps;
-    ResultSet rs;
+    public static ResultSet rs; 
 
     /**
      * Creates new form Pentrada
@@ -40,13 +46,15 @@ public class pEntrada extends javax.swing.JPanel {
     public pEntrada() {
         initComponents();
         xNumControl.setVisible(false);
+        numDePagina = 0;
         try {
-            llenarLista("");
+            llenarLista("",numDePagina);
         } catch (SQLException ex) {
             Logger.getLogger(pEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
+        valuesInit();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +64,8 @@ public class pEntrada extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         Contenedor = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -74,6 +84,19 @@ public class pEntrada extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaEntrada = new javax.swing.JTable();
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         setLayout(new java.awt.GridLayout(1, 0));
 
         Contenedor.setBackground(new java.awt.Color(244, 244, 244));
@@ -84,7 +107,7 @@ public class pEntrada extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(24, 160, 221));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(24, 160, 221));
-        jLabel1.setText("<html>\n<p></p>\n<p></p>\nRegistro de entrada\n<p></p>\n<p></p>\n<p></p>\n<html>");
+        jLabel1.setText("<html> <p></p> <p></p> Registro de Entrada <p></p> <p></p> <p></p> <html>");
         jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -221,7 +244,7 @@ public class pEntrada extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -243,11 +266,9 @@ public class pEntrada extends javax.swing.JPanel {
         Contenedor.setLayout(ContenedorLayout);
         ContenedorLayout.setHorizontalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ContenedorLayout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,103 +283,16 @@ public class pEntrada extends javax.swing.JPanel {
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
     
-
-    private boolean Validacion() {
-        boolean noControl;
-        if (txtNoControl.getText().isEmpty() || txtNoControl.getText().length() != 14) {
-            xNumControl.setVisible(true);
-            noControl = false;
-        } else {
-            xNumControl.setVisible(false);
-            noControl = true;
-        }
-        return noControl;
+    void valuesInit(){
+        /*Barra*/
+        btnPagInicio.setVisible(true);
+        btnPagAnterior.setVisible(true);
+        btnPagSiguiente.setVisible(true);
+        btnPagFinal.setVisible(true);
+        etiEstadoGuardar.setText("");
+        etiEstadoGuardar.setForeground(new Color(51,51,51));
     }
     
-    private void llenarLista(String condicion) throws SQLException{
-            DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("Número de Entrada");
-            modelo.addColumn("Nombre del Alumno");
-            modelo.addColumn("Fecha");
-            modelo.addColumn("Hora");
-            BD b;
-            b=new BD();
-            b.conectarBD();
-            rs = b.ejecutarSentenciaSQL("select e.NumEntrada, a.Nombre, a.ApPat, a.ApMat, "
-                    + "e.Fecha, e.Hora "
-                    + "from Entrada e, Alumnos a "
-                    + "where e.noControl = a.noControl "
-                    + ""+condicion+""
-                    + "order by NumEntrada asc limit 35 ");
-            while(rs.next()){
-                System.out.println(rs.getString("Nombre"));
-                modelo.addRow(new Object[]{rs.getString("NumEntrada"),
-                    rs.getString("a.Nombre")+" "+rs.getString("a.ApPat")+" "
-                        +rs.getString("a.ApMat"),rs.getString("e.Fecha"),
-                        rs.getString("e.Hora")});
-            }
-            
-            TablaEntrada.setModel(modelo);
-            TablaEntrada.setDefaultEditor(Object.class, null);
-            b.cerrarBD();
-            //javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    private void Registar(){
-        if (Validacion()) {
-            try {
-                String url = "jdbc:mysql://localhost:3306/cecytem";
-                String usuario = "root";
-                String contraseña = "root";
-
-                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                con = DriverManager.getConnection(url, usuario, contraseña);
-                if (con != null) {
-                    System.out.println("Se ha establecido una conexión a la base de datos "
-                            + "\n " + url);
-                }
-                ps = con.prepareStatement("SELECT * FROM Alumnos WHERE noControl = (?)"); // or Nombre = (?)");
-                ps.setString(1, txtNoControl.getText());
-                stmt = con.createStatement();
-                rs = ps.executeQuery();
-                if (rs.next()) { //Para leer varias posibles filas se cambia el while por el if
-                    //rs.getInt("id_compania");
-                    ps = con.prepareStatement("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES(?,?,?)");
-                    ps.setString(1, txtNoControl.getText());
-                    ps.setString(2, FechaHora.obtenerFecha());
-                    ps.setString(3, FechaHora.obtenerHora());
-                    stmt = con.createStatement();
-                    ps.executeUpdate();
-                    System.out.println("Los valores han sido agregados a la base de datos ");
-                    JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!",
-                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    txtNoControl.setText("");
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
-                            "Aviso",0);
-                    txtNoControl.requestFocus();
-                }
-
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Error al agregar");
-                JOptionPane.showMessageDialog(null, "Error al registar salida","Aviso - Base de datos error",0);
-            } finally {
-                if (con != null) {
-                    try {
-                        con.close();
-                        stmt.close();
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-            }
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);
-        }
-    }
     
     private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
 
@@ -371,19 +305,18 @@ public class pEntrada extends javax.swing.JPanel {
         if (txtNoControl.getText().length() > 13) {
             evt.consume();
         }
-
     }//GEN-LAST:event_txtNoControlKeyTyped
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Registar();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtNoControlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyPressed
         switch(evt.getKeyCode()){
             case KeyEvent.VK_ENTER:
-                Registar();
+            Registar();
         }
     }//GEN-LAST:event_txtNoControlKeyPressed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         xNumControl.setVisible(false);
@@ -404,7 +337,7 @@ public class pEntrada extends javax.swing.JPanel {
                     Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 */
-                llenarLista("AND e.noControl LIKE '"+txtNoControl.getText()+"%'");
+                llenarLista("AND e.noControl LIKE '"+txtNoControl.getText()+"%'",35);
             } catch (SQLException ex) {
                 Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -412,18 +345,98 @@ public class pEntrada extends javax.swing.JPanel {
         }
         else{
             try {
-                llenarLista("");
+                llenarLista("",35);
             } catch (SQLException ex) {
                 Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
             }
             txtNoControl.requestFocus();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+    
 
+    private boolean Validacion() {
+        boolean noControl;
+        if (txtNoControl.getText().isEmpty() || txtNoControl.getText().length() != 14) {
+            xNumControl.setVisible(true);
+            noControl = false;
+        } else {
+            xNumControl.setVisible(false);
+            noControl = true;
+        }
+        return noControl;
+    }
+    
+    public static void llenarLista(String condicion, int limit) throws SQLException{
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Número de Entrada");
+            modelo.addColumn("Nombre del Alumno");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Hora");
+            System.out.println("Limit"+limit);
+            if(!(limit < 0))
+                numDePagina = limit;
+            else
+                numDePagina=0;
+            TablaEntrada.removeAll();
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("select e.NumEntrada, a.Nombre, a.ApPat, a.ApMat, "
+                    + " e.Fecha, e.Hora "
+                    + "from Entrada e, Alumnos a "
+                    + "where e.noControl = a.noControl "
+                    + ""+condicion+""
+                    + "order by NumEntrada desc limit "+numDePagina+" ,"+35+"");
+            while(rs.next()){
+                modelo.addRow(new Object[]{rs.getString("NumEntrada"),
+                    rs.getString("a.Nombre")+" "+rs.getString("a.ApPat")+" "
+                        +rs.getString("a.ApMat"),rs.getString("e.Fecha"),
+                        rs.getString("e.Hora")});
+            }
+           
+            TablaEntrada.setModel(modelo);
+            TablaEntrada.setDefaultEditor(Object.class, null);
+            b.cerrarBD();
+            //javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void Registar(){
+        if (Validacion()) {
+           try {
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE "
+                    + "noControl = '"+txtNoControl.getText()+"'");
+            if(rs.next()){
+                    b.ejecutarSentenciaSQL("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES ('"
+                    +txtNoControl.getText()+"','"+FechaHora.obtenerFecha()+"','"+FechaHora.obtenerHora()+"')");
+                    System.out.println(""+rs);
+                    etiEstadoGuardar.setForeground(new Color(51,51,51));
+                    etiEstadoGuardar.setText("Guardado exitosamente");
+                    txtNoControl.setText("");
+                    llenarLista("",0);
+            }
+            else{
+                etiEstadoGuardar.setForeground(Color.red);
+                etiEstadoGuardar.setText("Aviso: El número de control es incorrecto");
+                txtNoControl.requestFocus();
+            }
+            b.cerrarBD();
+        } catch (SQLException ex) {
+            Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        } else {
+            etiEstadoGuardar.setForeground(Color.red);
+            etiEstadoGuardar.setText("Aviso: Rellena correctamente el Número de Control");
+            txtNoControl.requestFocus();
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Contenedor;
-    private javax.swing.JTable TablaEntrada;
+    public static javax.swing.JTable TablaEntrada;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
@@ -436,7 +449,9 @@ public class pEntrada extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtNoControl;
     private javax.swing.JLabel xNumControl;
     // End of variables declaration//GEN-END:variables

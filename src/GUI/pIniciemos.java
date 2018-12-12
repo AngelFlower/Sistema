@@ -6,6 +6,12 @@
 package GUI;
 
 import static GUI.pInicio.ContenedorInicio;
+import static GUI.pInicio.btnPagAnterior;
+import static GUI.pInicio.btnPagFinal;
+import static GUI.pInicio.btnPagInicio;
+import static GUI.pInicio.btnPagSiguiente;
+import static GUI.pInicio.etiEstadoGuardar;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 /**
@@ -19,6 +25,7 @@ public class pIniciemos extends javax.swing.JPanel {
      */
     public pIniciemos() {
         initComponents();
+        ValoresIniciales();
     }
 
     /**
@@ -39,11 +46,11 @@ public class pIniciemos extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         btnPerfil = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnEntrada = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnSalida = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnAlumnos = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -101,36 +108,51 @@ public class pIniciemos extends javax.swing.JPanel {
         jPanel9.setOpaque(false);
         jPanel9.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logina.png"))); // NOI18N
-        jButton2.setText(" Registrar Entrada");
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jPanel9.add(jButton2);
+        btnEntrada.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logina.png"))); // NOI18N
+        btnEntrada.setText(" Registrar Entrada");
+        btnEntrada.setContentAreaFilled(false);
+        btnEntrada.setFocusPainted(false);
+        btnEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntradaActionPerformed(evt);
+            }
+        });
+        jPanel9.add(btnEntrada);
 
         Centro.add(jPanel9);
 
         jPanel10.setOpaque(false);
         jPanel10.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/salida.png"))); // NOI18N
-        jButton3.setText(" Registrar Salida");
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusPainted(false);
-        jPanel10.add(jButton3);
+        btnSalida.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/salida.png"))); // NOI18N
+        btnSalida.setText(" Registrar Salida");
+        btnSalida.setContentAreaFilled(false);
+        btnSalida.setFocusPainted(false);
+        btnSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalidaActionPerformed(evt);
+            }
+        });
+        jPanel10.add(btnSalida);
 
         Centro.add(jPanel10);
 
         jPanel11.setOpaque(false);
         jPanel11.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pasar.png"))); // NOI18N
-        jButton4.setText(" Ir a alumnos");
-        jButton4.setContentAreaFilled(false);
-        jButton4.setFocusPainted(false);
-        jPanel11.add(jButton4);
+        btnAlumnos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pasar.png"))); // NOI18N
+        btnAlumnos.setText(" Ir a alumnos");
+        btnAlumnos.setContentAreaFilled(false);
+        btnAlumnos.setFocusPainted(false);
+        btnAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlumnosActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btnAlumnos);
 
         Centro.add(jPanel11);
 
@@ -139,7 +161,7 @@ public class pIniciemos extends javax.swing.JPanel {
         jPanel5.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel2.setText("<HTML>\n<P></P>\n¿Qué quires hacer?\n<P></P>\n<P></P>\n<HTML>");
+        jLabel2.setText("<HTML> <P></P> ¿Qué quieres hacer? <P></P> <P></P> <HTML>");
         jPanel5.add(jLabel2);
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.PAGE_START);
@@ -204,28 +226,66 @@ public class pIniciemos extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    void ValoresIniciales(){
+        /*Barra*/
+        btnPagInicio.setVisible(false);
+        btnPagAnterior.setVisible(false);
+        btnPagSiguiente.setVisible(false);
+        btnPagFinal.setVisible(false);
+        etiEstadoGuardar.setText("");
+        etiEstadoGuardar.setForeground(new Color(51,51,51));
+    }
+    
     private void btnPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseClicked
-        pUsuario iniciemos = new pUsuario();
+        pInicio.PanelSelectReset(pInicio.User);
+        pUsuario usuario = new pUsuario();
         ContenedorInicio.removeAll();
-        ContenedorInicio.add(iniciemos,GridLayout.class);
+        ContenedorInicio.add(usuario,GridLayout.class);
         ContenedorInicio.revalidate();
-        ContenedorInicio.repaint();// TODO add your handling code here:
+        ContenedorInicio.repaint();
     }//GEN-LAST:event_btnPerfilMouseClicked
+
+    private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
+        pInicio.PanelSelectReset(pInicio.btnEntrada);
+        pEntrada usuario = new pEntrada();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(usuario,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();
+    }//GEN-LAST:event_btnEntradaActionPerformed
+
+    private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
+        pInicio.PanelSelectReset(pInicio.btnSalida);
+        pSalida usuario = new pSalida();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(usuario,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();
+    }//GEN-LAST:event_btnSalidaActionPerformed
+
+    private void btnAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumnosActionPerformed
+        pInicio.PanelSelectReset(pInicio.btnAlumnos);
+        pAlumnos usuario = new pAlumnos();
+        ContenedorInicio.removeAll();
+        ContenedorInicio.add(usuario,GridLayout.class);
+        ContenedorInicio.revalidate();
+        ContenedorInicio.repaint();
+    }//GEN-LAST:event_btnAlumnosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Centro;
     private javax.swing.JPanel Contenedor;
+    private javax.swing.JButton btnAlumnos;
+    private javax.swing.JButton btnEntrada;
     private javax.swing.JButton btnPerfil;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

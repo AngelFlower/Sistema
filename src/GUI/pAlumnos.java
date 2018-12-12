@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import static GUI.pInicio.btnPagAnterior;
+import static GUI.pInicio.btnPagFinal;
+import static GUI.pInicio.btnPagInicio;
+import static GUI.pInicio.btnPagSiguiente;
+import static GUI.pInicio.etiEstadoGuardar;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Herramientas.BD;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +67,13 @@ public class pAlumnos extends javax.swing.JPanel {
         txtApMat.setText("");
         txtCalendar.setDate(null);
         txtGrupo.setText("");
+        /*Barra*/
+        btnPagInicio.setVisible(false);
+        btnPagAnterior.setVisible(false);
+        btnPagSiguiente.setVisible(false);
+        btnPagFinal.setVisible(false);
+        etiEstadoGuardar.setText("");
+        etiEstadoGuardar.setForeground(new Color(51,51,51));
     }
     
     /**
@@ -495,20 +508,26 @@ public class pAlumnos extends javax.swing.JPanel {
             xNumControl.setVisible(false);
             noControl = true;
         }
-        if (txtNombre.getText().isEmpty() || !nombre) {
+        if (txtNombre.getText().isEmpty() || txtNoControl.getText().length() > 24) {
             xNombre.setVisible(true);
+            nombre = false;
         } else {
             xNombre.setVisible(false);
+            nombre = true;
         }
-        if (txtApPat.getText().isEmpty() || !apPat) {
+        if (txtApPat.getText().isEmpty() || txtApPat.getText().length() > 24) {
             xApPat.setVisible(true);
+            apPat = false;
         } else {
             xApPat.setVisible(false);
+            apPat = true;
         }
-        if (txtApMat.getText().isEmpty() || !apMat) {
+        if (txtApMat.getText().isEmpty() || txtApMat.getText().length() > 24) {
             xApMat.setVisible(true);
+            apMat = false;
         } else {
             xApMat.setVisible(false);
+            apPat = true;
         }
         if (txtGrupo.getText().isEmpty() || txtGrupo.getText().length()!=3) {
             xGrupo.setVisible(true);
@@ -589,16 +608,9 @@ public class pAlumnos extends javax.swing.JPanel {
         if (!Character.isLetter(evt.getKeyChar())
                 && (evt.getKeyChar()) != KeyEvent.VK_SPACE) {
             evt.consume();
-            nombre = false;
-        } else {
-            nombre = true;
-        }
-        if (txtNombre.getText().length() > 24) {
+        } 
+        if (txtNombre.getText().length() > 24) 
             evt.consume();
-            nombre = false;
-        } else {
-            nombre = true;
-        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApPatActionPerformed
@@ -609,16 +621,9 @@ public class pAlumnos extends javax.swing.JPanel {
         if (!Character.isLetter(evt.getKeyChar())
                 && (evt.getKeyChar()) != KeyEvent.VK_SPACE) {
             evt.consume();
-            apPat = false;
-        } else {
-            apPat = true;
         }
-        if (txtApPat.getText().length() > 24) {
+        if (txtApPat.getText().length() > 24)
             evt.consume();
-            apPat = false;
-        } else {
-            apPat = true;
-        }
     }//GEN-LAST:event_txtApPatKeyTyped
 
     private void txtApMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApMatActionPerformed
@@ -627,12 +632,8 @@ public class pAlumnos extends javax.swing.JPanel {
 
     private void txtApMatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApMatKeyTyped
         if (!Character.isLetter(evt.getKeyChar())
-                && (evt.getKeyChar()) != KeyEvent.VK_SPACE) {
+                && (evt.getKeyChar()) != KeyEvent.VK_SPACE) 
             evt.consume();
-            apMat = false;
-        } else {
-            apMat = true;
-        }
         if (txtApMat.getText().length() > 24) {
             evt.consume();
         }
@@ -656,17 +657,24 @@ public class pAlumnos extends javax.swing.JPanel {
                 long d = date.getTime();
                 java.sql.Date fecha = new java.sql.Date(d);
                 sqlFechaNac = String.valueOf(fecha);
-                BD b;
-                b=new BD();
+                BD b=new BD();
                 b.conectarBD();
-                b.ejecutarSentenciaSQL("INSERT INTO Alumnos VALUES ('" + txtNoControl.getText()+"','"+
-                        txtNombre.getText()+"','"+txtApPat.getText()+"','"+txtApMat.getText()+
-                        "','"+sqlFechaNac+"','"+
-                        txtGrupo.getText()+"')");
+                rs = b.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE noControl ='"+
+                        txtNoControl.getText()+"'");
+                if(rs.next())
+                    JOptionPane.showMessageDialog(null, "El alumno ya está registrado", "Aviso", 0);
+                else{
+                    b.ejecutarSentenciaSQL("INSERT INTO Alumnos VALUES ('" + txtNoControl.getText()+"','"+
+                    txtNombre.getText()+"','"+txtApPat.getText()+"','"+txtApMat.getText()+
+                    "','"+sqlFechaNac+"','"+
+                    txtGrupo.getText()+"')");
+                    javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    llenarLista("");
+                    ValuesInit();
+                }
                 b.cerrarBD();
-                llenarLista("");
-                ValuesInit();
-                javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+                
             } catch (SQLException ex) {
                 Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
             }
