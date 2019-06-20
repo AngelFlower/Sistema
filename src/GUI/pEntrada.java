@@ -14,19 +14,13 @@ import Herramientas.FechaHora;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import Herramientas.BD;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class pEntrada extends javax.swing.JPanel {
     public static int numDePagina;
+    public static BD base = new BD();
     Connection con;
     Statement stmt;
     PreparedStatement ps;
@@ -47,10 +42,12 @@ public class pEntrada extends javax.swing.JPanel {
         initComponents();
         xNumControl.setVisible(false);
         numDePagina = 0;
-        try {
-            llenarLista("",numDePagina);
-        } catch (SQLException ex) {
-            Logger.getLogger(pEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        if(testBD()){
+            try {
+                llenarLista("",numDePagina);
+            } catch (SQLException ex) {
+                Logger.getLogger(pEntrada.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         valuesInit();
     }
@@ -282,8 +279,11 @@ public class pEntrada extends javax.swing.JPanel {
 
         add(Contenedor);
     }// </editor-fold>//GEN-END:initComponents
-    
-    void valuesInit(){
+    private boolean testBD(){
+        String resultado = base.conectarBD();
+        return "Se ha conectado la base de datos satisfactoriamente".equals(resultado);
+    }
+    private void valuesInit(){
         /*Barra*/
         btnPagInicio.setVisible(true);
         btnPagAnterior.setVisible(true);
@@ -322,21 +322,6 @@ public class pEntrada extends javax.swing.JPanel {
         xNumControl.setVisible(false);
         if(!txtNoControl.getText().isEmpty()){
             try {
-                /*String sqlBusqueda = txtBuscar.getText();
-                try {
-                    BD b;
-                    b=new BD();
-                    b.conectarBD();
-                    rs = b.ejecutarSentenciaSQL("SELECT * FROM Alumnos WHERE noControl="
-                        + "'" + txtNoControl.getText()+"'");
-                    b.cerrarBD();
-                    if(rs.next())
-                    llenarLista(sqlNoControl)
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                */
                 llenarLista("AND e.noControl LIKE '"+txtNoControl.getText()+"%'",35);
             } catch (SQLException ex) {
                 Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
@@ -378,10 +363,8 @@ public class pEntrada extends javax.swing.JPanel {
             else
                 numDePagina=0;
             TablaEntrada.removeAll();
-            BD b;
-            b=new BD();
-            b.conectarBD();
-            rs = b.ejecutarSentenciaSQL("select e.NumEntrada, a.Nombre, a.ApPat, a.ApMat, "
+            base.conectarBD();
+            rs = base.ejecutarSentenciaSQL("select e.NumEntrada, a.Nombre, a.ApPat, a.ApMat, "
                     + " e.Fecha, e.Hora "
                     + "from Entrada e, Alumnos a "
                     + "where e.noControl = a.noControl "
@@ -396,20 +379,18 @@ public class pEntrada extends javax.swing.JPanel {
            
             TablaEntrada.setModel(modelo);
             TablaEntrada.setDefaultEditor(Object.class, null);
-            b.cerrarBD();
+            base.cerrarBD();
             //javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void Registar(){
         if (Validacion()) {
            try {
-            BD b;
-            b=new BD();
-            b.conectarBD();
-            rs = b.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE "
+            base.conectarBD();
+            rs = base.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE "
                     + "noControl = '"+txtNoControl.getText()+"'");
             if(rs.next()){
-                    b.ejecutarSentenciaSQL("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES ('"
+                    base.ejecutarSentenciaSQL("INSERT INTO Entrada (noControl,Fecha, Hora) VALUES ('"
                     +txtNoControl.getText()+"','"+FechaHora.obtenerFecha()+"','"+FechaHora.obtenerHora()+"')");
                     System.out.println(""+rs);
                     etiEstadoGuardar.setForeground(new Color(51,51,51));
@@ -422,7 +403,7 @@ public class pEntrada extends javax.swing.JPanel {
                 etiEstadoGuardar.setText("Aviso: El número de control es incorrecto");
                 txtNoControl.requestFocus();
             }
-            b.cerrarBD();
+            base.cerrarBD();
         } catch (SQLException ex) {
             Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         } 

@@ -34,7 +34,7 @@ public class pLogin extends javax.swing.JPanel {
         user[0]="Admin";
         pass[0]="Admins";
         user[1]="root";
-        pass[1]="root";
+        pass[1]="";
         Existe = false;
     }
 

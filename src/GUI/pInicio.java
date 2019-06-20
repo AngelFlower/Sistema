@@ -7,7 +7,6 @@ package GUI;
 
 import static GUI.pEntrada.numDePagina;
 import Herramientas.BD;
-import Principal.main;
 import static Principal.main.ContenedorMain;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -23,14 +22,29 @@ import javax.swing.JPanel;
  * @author angel
  */
 public class pInicio extends javax.swing.JPanel {
+    public BD base =new BD();
     ResultSet rs;
     int a;
+    String[] options;
     /**
      * Creates new form pInicio
      */
     public pInicio() {
+        options = new String[]{"Cerrar sesión", "Salir", "Cancelar"};
         initComponents();
         InitValues();
+        //EstadoDeConexion();
+    }
+    private void EstadoDeConexion(){
+        String resultado = base.conectarBD();
+        if(!"Se ha conectado la base de datos satisfactoriamente".equals(resultado)){
+            etiEstadoConexion.setText("Error con la base de datos");
+            etiEstadoConexion.setForeground(Color.red);
+        }
+        else{
+            etiEstadoConexion.setText("Conectado");
+            etiEstadoConexion.setForeground(Color.green);
+        }
     }
     private void InitValues(){
         User.setName("false");
@@ -82,7 +96,7 @@ public class pInicio extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         ContenedorInicio = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        etiEstadoConexion = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         etiEstadoGuardar = new javax.swing.JLabel();
         btnPagInicio = new javax.swing.JButton();
@@ -374,7 +388,7 @@ public class pInicio extends javax.swing.JPanel {
         ContenedorInicio.setBackground(new java.awt.Color(224, 224, 224));
         ContenedorInicio.setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel13.setText("Conectado");
+        etiEstadoConexion.setText("Conectado");
 
         jLabel14.setText("Estado:");
 
@@ -428,7 +442,7 @@ public class pInicio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14)
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel13)
+                        .addComponent(etiEstadoConexion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(etiEstadoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -450,7 +464,7 @@ public class pInicio extends javax.swing.JPanel {
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiEstadoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
+                        .addComponent(etiEstadoConexion)
                         .addComponent(jLabel14))
                     .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnPagInicio)
@@ -561,15 +575,21 @@ public class pInicio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalidaMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
-        //PanelSelectReset(btnCerrarSesion);
-        int reply = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesion?",
-                "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            pLogin configuracion = new pLogin();
-            ContenedorMain.removeAll();
-            ContenedorMain.add(configuracion,GridLayout.class);
-            ContenedorMain.revalidate();
-            ContenedorMain.repaint();
+        //options = new String[]{"Cerrar sesión", "Salir", "Cancelar"};
+        int reply = JOptionPane.showOptionDialog(null, "¿Qué desea hacer?", "Seleccione",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+        switch(reply){
+            case 0: //Cerrar sesión
+                pLogin configuracion = new pLogin();
+                ContenedorMain.removeAll();
+                ContenedorMain.add(configuracion,GridLayout.class);
+                ContenedorMain.revalidate();
+                ContenedorMain.repaint();
+                break;
+            case 1: //Salir
+                System.exit(0);
+                break;
+            default:
         }
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
@@ -601,9 +621,7 @@ public class pInicio extends javax.swing.JPanel {
     private void btnPagSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagSiguienteActionPerformed
         if(btnEntrada.isOpaque()){
             try {
-                //PaginasEntrada(numDePagina+35);
-                int a = numDePagina+35;
-                pEntrada.llenarLista("", a);
+                pEntrada.llenarLista("", numDePagina+35);
             } catch (SQLException ex) {
                 Logger.getLogger(pInicio.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -624,9 +642,7 @@ public class pInicio extends javax.swing.JPanel {
     private void btnPagAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagAnteriorActionPerformed
         if(btnEntrada.isOpaque()){
             try {
-                //PaginasEntrada(numDePagina+35);
-                int a = numDePagina-35;
-                pEntrada.llenarLista("",a );
+                pEntrada.llenarLista("",numDePagina-35 );
             } catch (SQLException ex) {
                 Logger.getLogger(pInicio.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -647,9 +663,7 @@ public class pInicio extends javax.swing.JPanel {
     private void btnPagInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagInicioActionPerformed
         if(btnEntrada.isOpaque()){
             try {
-                //PaginasEntrada(numDePagina+35);
-                int a = 0;
-                pEntrada.llenarLista("",a );
+                pEntrada.llenarLista("",numDePagina = 0 );
             } catch (SQLException ex) {
                 Logger.getLogger(pInicio.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -670,10 +684,8 @@ public class pInicio extends javax.swing.JPanel {
     private void btnPagFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagFinalActionPerformed
         if(btnEntrada.isOpaque()){
             try {
-                //PaginasEntrada(numDePagina+35);
-                BD b = new BD();
-                b.conectarBD();
-                rs = b.ejecutarSentenciaSQL("SELECT COUNT(NumEntrada)"
+                base.conectarBD();
+                rs = base.ejecutarSentenciaSQL("SELECT COUNT(NumEntrada)"
                         + "AS Num FROM Entrada");
                 if(rs.next())
                     a = rs.getInt("Num")-35;
@@ -711,12 +723,12 @@ public class pInicio extends javax.swing.JPanel {
     public static javax.swing.JButton btnPagInicio;
     public static javax.swing.JButton btnPagSiguiente;
     public static javax.swing.JPanel btnSalida;
+    private javax.swing.JLabel etiEstadoConexion;
     public static javax.swing.JLabel etiEstadoGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
