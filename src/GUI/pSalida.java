@@ -5,8 +5,33 @@
  */
 package GUI;
 
+<<<<<<< HEAD
 import static GUI.main.ContenedorMain;
 import java.awt.GridBagLayout;
+=======
+import static GUI.pInicio.btnPagAnterior;
+import static GUI.pInicio.btnPagFinal;
+import static GUI.pInicio.btnPagInicio;
+import static GUI.pInicio.btnPagSiguiente;
+import static GUI.pInicio.etiEstadoGuardar;
+import Herramientas.FechaHora;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import Herramientas.BD;
+import javax.swing.table.DefaultTableModel;
+>>>>>>> new-system
 
 /**
  *
@@ -14,11 +39,31 @@ import java.awt.GridBagLayout;
  */
 public class pSalida extends javax.swing.JPanel {
 
+<<<<<<< HEAD
     /**
      * Creates new form bajasAlumno
      */
     public pSalida() {
         initComponents();
+=======
+    Connection con;
+    Statement stmt;
+    PreparedStatement ps;
+    ResultSet rs;
+
+    /**
+     * Creates new form Pentrada
+     */
+    public pSalida() {
+        initComponents();
+        xNumControl.setVisible(false);
+        try {
+            llenarLista("");
+        } catch (SQLException ex) {
+            Logger.getLogger(pSalida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        valuesInit();
+>>>>>>> new-system
     }
 
     /**
@@ -30,6 +75,7 @@ public class pSalida extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNoControl = new javax.swing.JTextField();
@@ -109,5 +155,369 @@ public class pSalida extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNoControl;
+=======
+        Contenedor = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNoControl = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        xNumControl = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaEntrada = new javax.swing.JTable();
+
+        setLayout(new java.awt.GridLayout(1, 0));
+
+        Contenedor.setBackground(new java.awt.Color(244, 244, 244));
+
+        jPanel1.setBackground(new java.awt.Color(249, 249, 249));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setBackground(new java.awt.Color(24, 160, 221));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(24, 160, 221));
+        jLabel1.setText("<html>\n<p></p>\n<p></p>\nRegistro de Salida\n<p></p>\n<p></p>\n<p></p>\n<html>");
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 9, Short.MAX_VALUE)
+        );
+
+        jPanel4.setOpaque(false);
+
+        jPanel5.setOpaque(false);
+
+        jPanel3.setOpaque(false);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("Número de control");
+
+        txtNoControl.setBackground(new java.awt.Color(244, 244, 244));
+        txtNoControl.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtNoControl.setBorder(null);
+        txtNoControl.setOpaque(false);
+        txtNoControl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoControlActionPerformed(evt);
+            }
+        });
+        txtNoControl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNoControlKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoControlKeyPressed(evt);
+            }
+        });
+
+        xNumControl.setForeground(new java.awt.Color(214, 36, 55));
+        xNumControl.setText("X");
+        xNumControl.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        btnRegistrar.setBackground(new java.awt.Color(244, 244, 244));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(241, 241, 241));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(xNumControl, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistrar))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNoControl)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(24, 24, 24))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(xNumControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnBuscar))
+                .addGap(6, 6, 6))
+        );
+
+        jPanel5.add(jPanel3);
+
+        jPanel6.setOpaque(false);
+
+        jPanel9.setLayout(new java.awt.GridLayout(1, 0));
+
+        TablaEntrada.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TablaEntrada.setPreferredSize(null);
+        jScrollPane1.setViewportView(TablaEntrada);
+
+        jPanel9.add(jScrollPane1);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
+        Contenedor.setLayout(ContenedorLayout);
+        ContenedorLayout.setHorizontalGroup(
+            ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ContenedorLayout.setVerticalGroup(
+            ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContenedorLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        add(Contenedor);
+    }// </editor-fold>//GEN-END:initComponents
+    
+    void valuesInit(){
+        /*Barra*/
+        btnPagInicio.setVisible(true);
+        btnPagAnterior.setVisible(true);
+        btnPagSiguiente.setVisible(true);
+        btnPagFinal.setVisible(true);
+        etiEstadoGuardar.setText("");
+        etiEstadoGuardar.setForeground(new Color(51,51,51));
+    }
+
+    private boolean Validacion() {
+        boolean noControl;
+        if (txtNoControl.getText().isEmpty() || txtNoControl.getText().length() != 14) {
+            xNumControl.setVisible(true);
+            noControl = false;
+        } else {
+            xNumControl.setVisible(false);
+            noControl = true;
+        }
+        return noControl;
+    }
+    
+    private void llenarLista(String condicion) throws SQLException{
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Número de Entrada");
+            modelo.addColumn("Nombre del Alumno");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Hora");
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("select s.NumSalida, a.Nombre, a.ApPat, a.ApMat, "
+                    + "s.Fecha, s.Hora "
+                    + "from Salida s, Alumnos a "
+                    + "where s.noControl = a.noControl "
+                    + ""+condicion+""
+                    + "order by NumSalida desc limit 35 ");
+            while(rs.next()){
+                System.out.println(rs.getString("Nombre"));
+                modelo.addRow(new Object[]{rs.getString("s.NumSalida"),
+                    rs.getString("a.Nombre")+" "+rs.getString("a.ApPat")+" "
+                        +rs.getString("a.ApMat"),rs.getString("s.Fecha"),
+                        rs.getString("s.Hora")});
+            }
+            
+            TablaEntrada.setModel(modelo);
+            TablaEntrada.setDefaultEditor(Object.class, null);
+            b.cerrarBD();
+            //javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso! \n", "AVISO!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void Registar(){
+        if (Validacion()) {
+            try {
+            BD b;
+            b=new BD();
+            b.conectarBD();
+            rs = b.ejecutarSentenciaSQL("SELECT noControl FROM Alumnos WHERE "
+                    + "noControl = '"+txtNoControl.getText()+"'");
+            if(rs.next()){
+                b.ejecutarSentenciaSQL("INSERT INTO Salida (noControl, Fecha, Hora) VALUES ('"
+                        +txtNoControl.getText()+"','"+FechaHora.obtenerFecha()+"','"+FechaHora.obtenerHora()+"')");
+                        llenarLista("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "El número de control es incorrecto",
+                            "Aviso",0);
+                txtNoControl.requestFocus();
+            }
+            b.cerrarBD();
+        } catch (SQLException ex) {
+            Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Rellena los campos correctamente", "Aviso", 0);
+        }
+    }
+    
+    private void txtNoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoControlActionPerformed
+
+    }//GEN-LAST:event_txtNoControlActionPerformed
+
+    private void txtNoControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+        if (txtNoControl.getText().length() > 13) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNoControlKeyTyped
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtNoControlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoControlKeyPressed
+        switch(evt.getKeyCode()){
+            case KeyEvent.VK_ENTER:
+                Registar();
+        }
+    }//GEN-LAST:event_txtNoControlKeyPressed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        xNumControl.setVisible(false);
+        if(!txtNoControl.getText().isEmpty()){
+            try {
+                /*String sqlBusqueda = txtBuscar.getText();
+                try {
+                    BD b;
+                    b=new BD();
+                    b.conectarBD();
+                    rs = b.ejecutarSentenciaSQL("SELECT * FROM Alumnos WHERE noControl="
+                        + "'" + txtNoControl.getText()+"'");
+                    b.cerrarBD();
+                    if(rs.next())
+                    llenarLista(sqlNoControl)
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                */
+                llenarLista("AND s.noControl LIKE '"+txtNoControl.getText()+"%'");
+            } catch (SQLException ex) {
+                Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtNoControl.requestFocus();
+        }
+        else{
+            try {
+                llenarLista("");
+            } catch (SQLException ex) {
+                Logger.getLogger(pAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtNoControl.requestFocus();
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Contenedor;
+    private javax.swing.JTable TablaEntrada;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txtNoControl;
+    private javax.swing.JLabel xNumControl;
+>>>>>>> new-system
     // End of variables declaration//GEN-END:variables
 }
