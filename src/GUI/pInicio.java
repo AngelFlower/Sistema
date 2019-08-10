@@ -5,10 +5,6 @@
  */
 package GUI;
 
-<<<<<<< HEAD
-import static GUI.main.ContenedorMain;
-import java.awt.GridLayout;
-=======
 import static GUI.pEntrada.numDePagina;
 import Herramientas.BD;
 import static Principal.main.ContenedorMain;
@@ -20,30 +16,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
->>>>>>> new-system
 
 /**
  *
  * @author angel
  */
 public class pInicio extends javax.swing.JPanel {
-<<<<<<< HEAD
-
-=======
     public BD base =new BD();
     ResultSet rs;
     int a;
     String[] options;
->>>>>>> new-system
     /**
      * Creates new form pInicio
      */
     public pInicio() {
-<<<<<<< HEAD
-        initComponents();
-    }
-
-=======
         options = new String[]{"Cerrar sesión", "Salir", "Cancelar"};
         initComponents();
         InitValues();
@@ -79,7 +65,6 @@ public class pInicio extends javax.swing.JPanel {
         etiEstadoGuardar.setText("");
         etiEstadoGuardar.setForeground(new Color(51,51,51));
     }
->>>>>>> new-system
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,202 +74,6 @@ public class pInicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
-        Centro = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        btnEntrada = new javax.swing.JButton();
-        btnSalida = new javax.swing.JButton();
-        btnAlumnos = new javax.swing.JButton();
-        Configuración = new javax.swing.JButton();
-        Arriba = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        Abajo = new javax.swing.JPanel();
-        Derecha = new javax.swing.JPanel();
-        Izquierda = new javax.swing.JPanel();
-
-        setOpaque(false);
-        setLayout(new java.awt.BorderLayout());
-
-        Centro.setOpaque(false);
-        Centro.setLayout(new java.awt.GridLayout(3, 2));
-
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 20));
-
-        jLabel2.setForeground(new java.awt.Color(247, 247, 247));
-        jLabel2.setText("Buscar");
-        jPanel4.add(jLabel2);
-
-        Centro.add(jPanel4);
-
-        jPanel5.setOpaque(false);
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 18));
-
-        jTextField1.setText("Prueba");
-        jPanel5.add(jTextField1);
-
-        Centro.add(jPanel5);
-
-        btnEntrada.setText("Entrada");
-        btnEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntradaActionPerformed(evt);
-            }
-        });
-        Centro.add(btnEntrada);
-
-        btnSalida.setText("Salida");
-        btnSalida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalidaActionPerformed(evt);
-            }
-        });
-        Centro.add(btnSalida);
-
-        btnAlumnos.setText("Alumnos");
-        btnAlumnos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlumnosActionPerformed(evt);
-            }
-        });
-        Centro.add(btnAlumnos);
-
-        Configuración.setText("Configuración");
-        Centro.add(Configuración);
-
-        add(Centro, java.awt.BorderLayout.CENTER);
-
-        Arriba.setOpaque(false);
-        Arriba.setLayout(new java.awt.GridLayout(3, 0));
-
-        jPanel2.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 27, Short.MAX_VALUE)
-        );
-
-        Arriba.add(jPanel2);
-
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-        Arriba.add(jPanel1);
-
-        jPanel3.setOpaque(false);
-
-        jLabel1.setForeground(new java.awt.Color(249, 249, 249));
-        jLabel1.setText("Gestión de entrada y salida  -  CECyTEM ");
-        jPanel3.add(jLabel1);
-
-        Arriba.add(jPanel3);
-
-        add(Arriba, java.awt.BorderLayout.PAGE_START);
-
-        Abajo.setOpaque(false);
-
-        javax.swing.GroupLayout AbajoLayout = new javax.swing.GroupLayout(Abajo);
-        Abajo.setLayout(AbajoLayout);
-        AbajoLayout.setHorizontalGroup(
-            AbajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        AbajoLayout.setVerticalGroup(
-            AbajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 61, Short.MAX_VALUE)
-        );
-
-        add(Abajo, java.awt.BorderLayout.PAGE_END);
-
-        Derecha.setOpaque(false);
-
-        javax.swing.GroupLayout DerechaLayout = new javax.swing.GroupLayout(Derecha);
-        Derecha.setLayout(DerechaLayout);
-        DerechaLayout.setHorizontalGroup(
-            DerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        DerechaLayout.setVerticalGroup(
-            DerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        add(Derecha, java.awt.BorderLayout.LINE_END);
-
-        Izquierda.setOpaque(false);
-
-        javax.swing.GroupLayout IzquierdaLayout = new javax.swing.GroupLayout(Izquierda);
-        Izquierda.setLayout(IzquierdaLayout);
-        IzquierdaLayout.setHorizontalGroup(
-            IzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        IzquierdaLayout.setVerticalGroup(
-            IzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        add(Izquierda, java.awt.BorderLayout.LINE_START);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumnosActionPerformed
-        pAlumno alumno = new pAlumno(); //Crea un objeto del tipo pAlumno
-        alumno.setLocation(0, 0);
-        ContenedorMain.removeAll();//Borra todo lo que esta en el Jframe
-        ContenedorMain.add(alumno,GridLayout.class);//Añade el objeto alumno
-        ContenedorMain.revalidate();
-        ContenedorMain.repaint();
-    }//GEN-LAST:event_btnAlumnosActionPerformed
-
-    private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
-        pEntrada entrada = new pEntrada();
-        entrada.setLocation(0, 0);
-        ContenedorMain.removeAll();
-        ContenedorMain.add(entrada,GridLayout.class);
-        ContenedorMain.revalidate();
-        ContenedorMain.repaint();
-    }//GEN-LAST:event_btnEntradaActionPerformed
-
-    private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
-        pSalida salida = new pSalida();
-        salida.setLocation(0, 0);
-        ContenedorMain.removeAll();
-        ContenedorMain.add(salida,GridLayout.class);
-        ContenedorMain.revalidate();
-        ContenedorMain.repaint();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalidaActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Abajo;
-    private javax.swing.JPanel Arriba;
-    private javax.swing.JPanel Centro;
-    private javax.swing.JButton Configuración;
-    private javax.swing.JPanel Derecha;
-    private javax.swing.JPanel Izquierda;
-    private javax.swing.JButton btnAlumnos;
-    private javax.swing.JButton btnEntrada;
-    private javax.swing.JButton btnSalida;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-=======
         bg = new javax.swing.JPanel();
         MenuMain = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
@@ -949,6 +738,5 @@ public class pInicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
->>>>>>> new-system
     // End of variables declaration//GEN-END:variables
 }

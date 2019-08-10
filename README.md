@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# sistema
-Sistema de gestión de entrada
-=======
 # Sistema de gestión de entrada y salida
 
 Proyecto para plantel CECYTEM
@@ -65,4 +61,3 @@ Mira tambien la lista de [Contribuidores](https://github.com/AngelFlower/Meraky/
 Lo sentimos, el proyecto aun no esta terminado.
 
 Descargas no disponibles.
->>>>>>> new-system
